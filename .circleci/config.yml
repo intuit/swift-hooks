@@ -49,7 +49,7 @@ jobs:
 
   release:
     docker:
-      - image: hborawski/auto-container:sha-1bb9c32
+      - image: hborawski/auto-container:sha-767eebf
 
     steps:
       - checkout
