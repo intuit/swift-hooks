@@ -46,6 +46,10 @@ jobs:
           path: .build/reports/
       - store_artifacts:
           path: .build/reports/
+      - persist_to_workspace:
+          root: .
+          paths:
+            - SwiftHooks.doccarchive
 
   release:
     docker:
@@ -53,6 +57,9 @@ jobs:
 
     steps:
       - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: cp -r /tmp/workspace/SwiftHooks.doccarchive .
       - run: 
           name: Git Config
           command: |
