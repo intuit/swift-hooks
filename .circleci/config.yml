@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: hborawski/swift-docc-docker:latest
+      - image: hborawski/swift-docc-docker:sha-27aafd2
 
     steps:
       - checkout
@@ -49,7 +49,7 @@ jobs:
 
   release:
     docker:
-      - image: hborawski/swift-docc-docker:latest
+      - image: hborawski/swift-docc-docker:sha-27aafd2
 
     steps:
       - checkout
