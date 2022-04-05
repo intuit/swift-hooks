@@ -1,4 +1,4 @@
 included:
   - Sources
 excluded:
-  - Sources/Hooks/Documentation.docc/**/*.swift
+  - Sources/SwiftHooks/Documentation.docc/**/*.swift

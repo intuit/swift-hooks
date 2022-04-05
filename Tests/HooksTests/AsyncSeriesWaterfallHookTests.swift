@@ -1,5 +1,5 @@
 import XCTest
-@testable import Hooks
+@testable import SwiftHooks
 
 class AsyncSeriesWaterfallHookTests: XCTestCase {
     func testAsyncSeriesWaterfallHook() async {

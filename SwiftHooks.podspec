@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
-  s.name             = 'Hooks'
+  s.name             = 'SwiftHooks'
   s.version          = '0.0.1'
   s.summary          = 'A little module for plugins'
   s.swift_versions   = ['5.5']
   s.description      = <<-DESC
-Hooks is a package for enabling plugins and plugin architecture
+SwiftHooks is a package for enabling plugins and plugin architecture
 with a variety of different hook implementations synchronous and
 asynchronous
                        DESC
@@ -16,6 +16,6 @@ asynchronous
 
   s.ios.deployment_target = '13.0'
 
-  s.source_files = ['Sources/Hooks/**/*.swift']
+  s.source_files = ['Sources/SwiftHooks/**/*.swift']
   s.exclude_files = ['**/*.docc/**/*']
 end

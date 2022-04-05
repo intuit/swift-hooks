@@ -1,4 +1,4 @@
-import Hooks
+import SwiftHooks
 
 struct Location {}
 

@@ -1,2 +1,2 @@
 --swiftversion 5.5
---exclude Sources/Hooks/Documentation.docc/
+--exclude Sources/SwiftHooks/Documentation.docc/

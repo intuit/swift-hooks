@@ -1,5 +1,5 @@
 import XCTest
-@testable import Hooks
+@testable import SwiftHooks
 
 class SyncHookTests: XCTestCase {
     func testSyncSeriesHook() {

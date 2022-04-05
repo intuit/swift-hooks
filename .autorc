@@ -4,7 +4,13 @@
     [
       "cocoapods",
       {
-        "podspecPath": "Hooks.podspec"
+        "podspecPath": "SwiftHooks.podspec"
+      }
+    ],
+    [
+      "gh-pages",
+      {
+        "dir": "./SwiftHooks.doccarchive/"
       }
     ],
     "released", 

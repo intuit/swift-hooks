@@ -1,5 +1,5 @@
 import XCTest
-@testable import Hooks
+@testable import SwiftHooks
 class TestHook<T>: BaseSyncHook<T, Void> {
     public func call(_ value: T) {
         var context = context(value)

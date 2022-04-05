@@ -1,5 +1,5 @@
 import XCTest
-@testable import Hooks
+@testable import SwiftHooks
 @testable import ExampleLibrary
 
 class WarningLampPlugin: CarPlugin {
