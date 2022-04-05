@@ -1,0 +1,34 @@
+@Tutorial(time: 5) {
+    @Intro(title: "Hook Context") {
+        All taps have an option of the tapping closure to also receive context. Context can be populated by interceptors, so allow more fine grained interaction between plugins.
+        
+<!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
+    }
+    
+    @Section(title: "Tapping with Context") {
+        @ContentAndMedia {
+            Every hook has a variant of `tap` or `tapAsync` that sends the closure the context object. For synchronous hooks the type is `[String: Any]` so any arbitrary information can be included.
+            
+<!--            @Image(source: <#file#>, alt: "<#accessible description#>")-->
+        }
+        
+        @Steps {
+            @Step {
+                Tap and receive context
+                
+                @Code(name: "Context.swift", file: TapVariants.swift)
+            }
+            
+            @Step {
+                Populate context
+                
+                @Code(name: "Context.swift", file: PopulateContext.swift)
+            }
+            @Step {
+                For Async hooks, `[String: Any]` is wrapped as an actor for concurrent access.
+                
+                @Code(name: "Context.swift", file: ConcurrentContext.swift)
+            }
+        }
+    }
+}

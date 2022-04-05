@@ -1,0 +1,84 @@
+@Tutorial(time: 5) {
+    @Intro(title: "Plugin Architecture") {
+        Hooks can be used adhoc, and work well at it, the main use case is to enable a plugin architecture. Plugin architecture can be perceived as similar to the delegate patterns frequently used in iOS frameworks, such as UIKit.
+        
+        However, rather than having a single delegate for some given class, any number of plugins can tap hooks to supply functionality, or react to events in the lifecycle of the software calling the hooks.
+        
+<!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
+    }
+    
+    @Section(title: "Simple Example") {
+        @ContentAndMedia {
+            Consider a very barebones vehicle that can only accelerate and brake. Cars can come with many different peripherals, making determining exactly what logic to encode for those many variations complicated.
+            
+            By building this with a plugin architecture, the responsibility of connecting to the hardware is delegated to a plugin, rather than in the implementation of the Car itself.
+        }
+        
+        @Steps {
+            
+            @Step {
+                Define the hooks that the car will need.
+                
+                @Code(name: "CarHooks.swift", file: CarHooks.swift)
+            }
+            
+            @Step {
+                For this example, the `Car` will only expose a `speed` API to change the speed of the car.
+                
+                @Code(name: "Car.swift", file: CarExample.swift)
+            }
+            @Step {
+                Then the hooks can be tapped, in an adhoc manner this couples the tap implementations to the `Car` instantiation point, and does not really make this extensible.
+                
+                @Code(name: "CarUse.swift", file: CarAdhoc.swift)
+            }
+            @Step {
+                Instead, `Car` can be refactored to take plugins as a part of its construction, and the logic pertaining to specific features can be contained in the plugins.
+                
+                @Code(name: "Car.swift", file: CarExamplePlugins.swift)
+            }
+            @Step {
+                The logic that was previously coupled to `Car` instantiation can now be moved into a plugin.
+                
+                @Code(name: "CarLoggerPlugin.swift", file: CarPlugin.swift)
+            }
+            @Step {
+                Now `Car` can be instantiated with a plugin instead of tapping hooks directly.
+                
+                @Code(name: "CarUse.swift", file: CarWithPlugins.swift)
+            }
+        }
+    }
+    @Section(title: "Practical Example") {
+        @ContentAndMedia {
+            Now that the basics of plugin architecture are understood, creating a `Hook` based logger is an easy task.
+            
+            A `Hook` based logger will allow any plugin to retrieve and act on log events, rather than requiring all logging happen in one place.
+        }
+        @Steps {
+            @Step {
+                Create the hooks for the logger.
+                
+                @Code(name: "LoggerHooks.swift", file: LoggerHooks.swift)
+            }
+            
+            @Step {
+                Create the `Logger` itself.
+                
+                @Code(name: "Logger.swift", file: Logger.swift)
+            }
+            @Step {
+                Create plugins
+                
+                @Code(name: "ErrorLoggingPlugin.swift", file: ErrorLoggingPlugin.swift)
+            }
+            @Step {
+                Printing logs is not a hard task, but encapsulating functionality for how logging happens for a library, can allow ease of access for other users to onboard.
+                
+                In a scenario where logs are sent to some remote server, the formatting of the logs can be solely in a plugin, tapping the ``LoggerHooks`` so users who want to upload logs only need to include the plugin
+                
+                @Code(name: "RemoteLoggingPlugin.swift", file: RemoteLoggingPlugin.swift)
+            }
+        }
+    }
+}

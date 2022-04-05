@@ -1,0 +1,102 @@
+@Tutorial(time: 5) {
+    @Intro(title: "Interceptors") {
+        Every Hook provides the capability to register interceptor functions for different parts of the Hook lifecycle
+        
+        | API | Description |
+        |-----|-------------|
+        |`interceptCall`| Call interceptors trigger when hooks are called and have access to the parameters from the call, and the ``HookContext``|
+        |`interceptTap`| Tap interceptors will trigger for each tap when a hook is called and have access to the corresponding ``Tap`` information, and the ``HookContext``|
+        |`interceptRegister`| Register interceptors will trigger whenever a hook is tapped, and have the opportunity to modify or prevent the ``Tap`` from being added to the hook |
+        |`interceptLoop`| Loop interceptors share the same signature as call interceptors, but are only available for `Loop` hooks. They are triggered for each iteration of the loop.|
+        
+<!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
+    }
+    
+    @Section(title: "Register Interceptors") {
+        @ContentAndMedia {
+            Register interceptors run when a hook is tapped, allowing for introspection and modification.
+            
+<!--            @Image(source: <#file#>, alt: "<#accessible description#>")-->
+        }
+        
+        @Steps {            
+            @Step {
+                Call `interceptRegister(_:)` on a hook to attach an interceptor
+                
+                @Code(name: "InterceptRegister.swift", file: InterceptRegister.swift)
+            }
+            @Step {
+                Tap the hook to have the interceptor run, returning `nil` will prevent the tap from being added to the hook.
+                @Code(name: "InterceptRegister.swift", file: InterceptRegisterTapped.swift)
+            }
+        }
+    }
+    @Section(title: "Tap Interceptors") {
+        @ContentAndMedia {
+            Tap interceptors run when a hook is called, allowing for introspection into what taps are being run. The interceptor is invoked for each `Tap` added to a hook. If a hook has not been tapped, the interceptor will not be called.
+        }
+        
+        @Steps {            
+            @Step {
+                Call `interceptTap(_:)` on a hook to attach an interceptor
+                
+                @Code(name: "InterceptTap.swift", file: InterceptTap.swift)
+            }
+            @Step {
+                Calling the hook will run the tap interceptor, and the interceptor will receive the `Tap` object, but it cannot be modified.
+                @Code(name: "InterceptTap.swift", file: InterceptTapTapped.swift)
+            }
+        }
+    }
+    @Section(title: "Call Interceptors") {
+        @ContentAndMedia {
+            Call interceptors run when a hook is called, allowing for introspection into what arguments are being sent to a tap.
+        }
+        
+        @Steps {            
+            @Step {
+                Call `interceptCall(_:)` on a hook to attach an interceptor
+                
+                @Code(name: "InterceptCall.swift", file: InterceptCall.swift)
+            }
+            @Step {
+                Calling the hook will run the call interceptor, and the interceptor will receive the `Parameters` that the tap does.
+                @Code(name: "InterceptCall.swift", file: InterceptCallTapped.swift)
+            }
+        }
+    }
+    @Section(title: "Loop Interceptors") {
+        @ContentAndMedia {
+            Loop interceptors run when a hook is called, allowing for introspection into what arguments are being sent to a tap. Loop hooks will call tap interceptors, and loop interceptors on each iteration of the loop.
+        }
+        
+        @Steps {            
+            @Step {
+                Call `interceptLoop(_:)` on a `Loop` hook to attach an interceptor
+                
+                @Code(name: "InterceptLoop.swift", file: InterceptLoop.swift)
+            }
+            @Step {
+                Calling the hook will run the loop interceptor, and the interceptor will receive the `Parameters` that the tap does. The loop interceptor will run for each iteration of the loop.
+                @Code(name: "InterceptLoop.swift", file: InterceptLoopTapped.swift)
+            }
+        }
+    }
+    @Section(title: "All Interceptors") {
+        @ContentAndMedia {
+            When using a `Loop` hook, it's clear to see the order of execution for interceptors.
+        }
+        
+        @Steps {            
+            @Step {
+                Set up interceptors
+                
+                @Code(name: "InterceptAll.swift", file: InterceptAll.swift)
+            }
+            @Step {
+                Tap and call the hook to see all the interceptors run.
+                @Code(name: "InterceptAll.swift", file: InterceptAllTapped.swift)
+            }
+        }
+    }
+}

@@ -1,0 +1,98 @@
+@Tutorial(time: 5) {
+    @Intro(title: "Key Concepts") {
+        Introduction to Hooks
+        
+<!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
+    }
+    
+    @Section(title: "Nomenclature") {
+        @ContentAndMedia {
+            To those new to this project, it might help to go over some terms:
+            - Hook - an extension point in software for internal or external modification
+            - Tap - A registered function to be invoked by a `Hook`
+            - Call - The invocation of a `Hook` to execute `Taps`
+            - Plugin - An encapsulation of modifications to apply to `Hooks`
+            
+<!--            @Image(source: <#file#>, alt: "<#accessible description#>")-->
+
+        }
+        
+        @Steps {            
+            @Step {
+                "Basic" Hooks just call all of the taps registered to them, without retrieving a return value. These hooks are good for notifying plugins that something has happened.
+                
+                @Code(name: "HookTypes.swift", file: BasicHooks.swift)
+            }
+            
+            @Step {
+                "Waterfall" Hooks reduce and initial value through all of the taps to retrieve a single resulting value. The calling value is the same type as the return value.
+                
+                @Code(name: "HookTypes.swift", file: WaterfallHooks.swift)
+            }
+            
+            @Step {
+                "Bail" Hooks call taps until a tap returns a ``BailResult/bail(_:)`` indicating that it handled the result. The calling value and return type can differ.
+                
+                @Code(name: "HookTypes.swift", file: BailHooks.swift)
+            }
+            
+            @Step {
+                "Loop" Hooks call taps in order until a tap returns ``LoopResult/restart`` where it will restart from the first tap. This will loop until all taps return ``LoopResult/continue``.
+                
+                @Code(name: "HookTypes.swift", file: LoopHooks.swift)
+            }
+        }
+    }
+    
+    @Section(title: "Asynchronous Variants") {
+        @ContentAndMedia {
+            Asynchronous Hooks have `Series` and `Parallel` variants (where applicable). Depending on the use case, the choice of hook can make a difference.
+        }
+        
+        @Steps {
+            @Step {
+                ``AsyncSeriesHook`` vs ``AsyncParallelHook`` Example.
+                
+                In a situation where some number of plugins need to be notified of a result and perform asynchornous operations, determining whether or not the order of taps executing matters can save time.
+                
+                @Code(name: "AsyncHooks.swift", file: AsyncHooks.swift)
+            }
+            @Step {
+                ``AsyncSeriesHook`` will `await` each tap before executing the next tap. When operations take time, this can add up.
+                
+                @Code(name: "AsyncHooks.swift", file: AsyncSeriesHook.swift)
+            }
+            @Step {
+                ``AsyncParallelHook`` will `await` for a task group to complete all tasks as they are executed at the same time.
+                
+                @Code(name: "AsyncHooks.swift", file: AsyncParallelHook.swift)
+            }
+        }
+    }
+    @Assessments {
+        @MultipleChoice {
+            What type of hook does not return a value?
+            @Choice(isCorrect: true) {
+                Loop Hooks
+                
+                @Justification(reaction: "Correct!") {
+                    `Loop` hooks do not have a return value, and taps can only react to the call.
+                }
+            }
+            @Choice(isCorrect: false) {
+                Bail Hooks
+                
+                @Justification(reaction: "Try again!") {
+                    `Bail` hooks will return the result from the first tap that responds with ``BailResult/bail(_:)``.
+                }
+            }
+            @Choice(isCorrect: false) {
+                Waterfall Hooks
+                
+                @Justification(reaction: "Try again!") {
+                    `Waterfall` hooks will return the result of reducing the calling value through all taps.
+                }
+            }
+        }
+    }
+}

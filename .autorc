@@ -1,0 +1,18 @@
+
+{
+  "plugins": [
+    [
+      "cocoapods",
+      {
+        "podspecPath": "Hooks.podspec"
+      }
+    ],
+    "released", 
+    "first-time-contributor",
+    "all-contributors"
+  ],
+  "owner": "intuit",
+  "repo": "swift-hooks",
+  "name": "Harris Borawski",
+  "email": "harris_borawski@intuit.com"
+}

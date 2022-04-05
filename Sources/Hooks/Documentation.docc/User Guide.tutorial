@@ -1,0 +1,49 @@
+@Tutorials(name: "Hooks") {
+    @Intro(title: "User Guide") {
+        Learn how to use Hooks
+        
+<!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
+    }
+    
+    @Volume(name: "Getting Started") {
+        What are Hooks, and how are they used?
+        @Chapter(name: "Key Concepts") {
+            The basics and background of Hooks
+    <!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
+            
+            @TutorialReference(tutorial: "doc:Key-Concepts")
+        }
+        
+        @Chapter(name: "Plugin Architecture") {
+            The architecture powered by hooks, a great way to write extensible software.
+    <!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
+            
+            @TutorialReference(tutorial: "doc:Plugin-Architecture")
+        }
+    }
+    
+    @Volume(name: "Advanced Usage") {
+        Additional supported capabilities of hooks, for more complex use cases.
+        @Chapter(name: "Interceptors") {
+            Advanced usage of Hooks may see the need to intercept varying information about hooks, and what is tapping them.
+    <!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
+            
+            @TutorialReference(tutorial: "doc:Interceptors-Usage")
+        }
+        @Chapter(name: "Context") {
+            Advanced usage of Hooks may see the need to pass contextual information to taps in certain circumstances.
+    <!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
+            
+            @TutorialReference(tutorial: "doc:HookContextGuide")
+        }
+    }
+    
+    @Resources {
+        More Information
+        @Documentation {
+            API Documentation
+            
+            <doc:Hooks>
+        }
+    }
+}
