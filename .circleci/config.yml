@@ -55,6 +55,7 @@ jobs:
       - checkout
       - run: whoami
       - run: echo $PATH
+      - run: rbenv rehash
       - run: which pod
       - run: ~/auto shipit -vvv --dry-run
 workflows:
