@@ -1,3 +1,15 @@
+# 0.0.4 (Tue Apr 05 2022)
+
+#### 🐛 Bug Fix
+
+- use workspace to persist doc archive to release job [#3](https://github.com/intuit/swift-hooks/pull/3) ([@hborawski](https://github.com/hborawski))
+
+#### Authors: 1
+
+- Harris Borawski ([@hborawski](https://github.com/hborawski))
+
+---
+
 # 0.0.3 (Tue Apr 05 2022)
 
 ### Release Notes
