@@ -1,3 +1,23 @@
+# 0.0.5 (Tue Apr 05 2022)
+
+### Release Notes
+
+#### set base path for docs to work with github pages ([#4](https://github.com/intuit/swift-hooks/pull/4))
+
+
+
+---
+
+#### 🐛 Bug Fix
+
+- set base path for docs to work with github pages [#4](https://github.com/intuit/swift-hooks/pull/4) ([@hborawski](https://github.com/hborawski))
+
+#### Authors: 1
+
+- Harris Borawski ([@hborawski](https://github.com/hborawski))
+
+---
+
 # 0.0.4 (Tue Apr 05 2022)
 
 #### 🐛 Bug Fix
