@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: hborawski/swift-docc-docker:latest
+      - image: hborawski/swift-docc-docker:sha-fa2a2c1
 
     steps:
       - checkout
@@ -49,11 +49,18 @@ jobs:
 
   release:
     docker:
-      - image: hborawski/swift-docc-docker:latest
+      - image: hborawski/auto-container:sha-1bb9c32
 
     steps:
       - checkout
-      - run: ~/auto shipit -vvv --dry-run
+      - run: 
+          name: Git Config
+          command: |
+            echo "https://$GITHUB_USER:$GH_TOKEN@github.intuit.com" >> /tmp/gitcredfile
+            git config --global user.name "$GITHUB_USER"
+            git config --global user.email "opensource-svc@intuit.com"
+            git config --global credential.helper "store --file=/tmp/gitcredfile"
+      - run: ~/auto shipit -vvv
 workflows:
   version: 2
   build:

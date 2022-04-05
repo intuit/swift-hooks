@@ -1,13 +1,13 @@
 <div align="center">
   <img
-    src="Sources/Hooks/Documentation.docc/Resources/Images/hooks@2x.png"
-    alt="Hooks Logo"
+    src="Sources/SwiftHooks/Documentation.docc/Resources/Images/hooks@2x.png"
+    alt="SwiftHooks Logo"
     width="300px"
     padding="40px"
   />
   <br />
   <br />
-  <p>Hooks is a little module for plugins, in Swift</p>
+  <p>SwiftHooks is a little module for plugins, in Swift</p>
 </div>
 
 ---
@@ -46,13 +46,13 @@ let package = Package(
 Install with [CocoaPods](https://cocoapods.org/) by adding an entry to your `Podfile`, and then running `pod install`:
 
 ```ruby
-pod 'Hooks'
+pod 'SwiftHooks'
 ```
 
 ## Structure
 
-- [Hooks](https://github.com/intuit/swift-hooks/tree/main/Sources/Hooks) - The Hooks implementation
-- [ExampleLibrary](https://github.com/intuit/swift-hooks/tree/main/Sources/ExampleLibrary) - An example usage of Hooks
+- [SwiftHooks](https://github.com/intuit/swift-hooks/tree/main/Sources/SwiftHooks) - The SwiftHooks implementation
+- [ExampleLibrary](https://github.com/intuit/swift-hooks/tree/main/Sources/ExampleLibrary) - An example usage of SwiftHooks
 
 ## Contributing
 

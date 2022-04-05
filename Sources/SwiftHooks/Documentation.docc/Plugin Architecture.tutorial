@@ -1,6 +1,6 @@
 @Tutorial(time: 5) {
     @Intro(title: "Plugin Architecture") {
-        Hooks can be used adhoc, and work well at it, the main use case is to enable a plugin architecture. Plugin architecture can be perceived as similar to the delegate patterns frequently used in iOS frameworks, such as UIKit.
+        SwiftHooks can be used adhoc, and work well at it, the main use case is to enable a plugin architecture. Plugin architecture can be perceived as similar to the delegate patterns frequently used in iOS frameworks, such as UIKit.
         
         However, rather than having a single delegate for some given class, any number of plugins can tap hooks to supply functionality, or react to events in the lifecycle of the software calling the hooks.
         

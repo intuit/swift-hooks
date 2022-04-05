@@ -1,14 +1,14 @@
-@Tutorials(name: "Hooks") {
+@Tutorials(name: "SwiftHooks") {
     @Intro(title: "User Guide") {
-        Learn how to use Hooks
+        Learn how to use SwiftHooks
         
 <!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
     }
     
     @Volume(name: "Getting Started") {
-        What are Hooks, and how are they used?
+        What are SwiftHooks, and how are they used?
         @Chapter(name: "Key Concepts") {
-            The basics and background of Hooks
+            The basics and background of SwiftHooks
     <!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
             
             @TutorialReference(tutorial: "doc:Key-Concepts")
@@ -25,13 +25,13 @@
     @Volume(name: "Advanced Usage") {
         Additional supported capabilities of hooks, for more complex use cases.
         @Chapter(name: "Interceptors") {
-            Advanced usage of Hooks may see the need to intercept varying information about hooks, and what is tapping them.
+            Advanced usage of SwiftHooks may see the need to intercept varying information about hooks, and what is tapping them.
     <!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
             
             @TutorialReference(tutorial: "doc:Interceptors-Usage")
         }
         @Chapter(name: "Context") {
-            Advanced usage of Hooks may see the need to pass contextual information to taps in certain circumstances.
+            Advanced usage of SwiftHooks may see the need to pass contextual information to taps in certain circumstances.
     <!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
             
             @TutorialReference(tutorial: "doc:HookContextGuide")
@@ -43,7 +43,7 @@
         @Documentation {
             API Documentation
             
-            <doc:Hooks>
+            <doc:SwiftHooks>
         }
     }
 }

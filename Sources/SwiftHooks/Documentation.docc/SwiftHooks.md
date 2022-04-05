@@ -1,11 +1,11 @@
-# ``Hooks``
+# ``SwiftHooks``
 
 ![Logo](hooks.png)
 
 A little module for plugins, in swift.
 
 ## Overview
-Hooks is a swift package for enabling plugins, based on [tapable](https://github.com/webpack/tapable) and [hooks](https://github.com/intuit/hooks/).
+SwiftHooks is a swift package for enabling plugins, based on [tapable](https://github.com/webpack/tapable) and [hooks](https://github.com/intuit/hooks/).
 
 A `Hook` represents a "pluggable" point in a software model. They provide a mechanism for "tapping" into such points to get updates, or apply additional functionality to some typed object.
 
