@@ -1,6 +1,6 @@
 @Tutorial(time: 5) {
     @Intro(title: "Key Concepts") {
-        Introduction to Hooks
+        Introduction to SwiftHooks
         
 <!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
     }
