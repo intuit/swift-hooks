@@ -1,6 +1,6 @@
 #!/bin/sh
 
-swift test --parallel --enable-code-coverage
+swift test --parallel --enable-code-coverage --xunit-output=.build/reports/junit.xml
 
 BIN_PATH="$(swift build --show-bin-path)"
 XCTEST_PATH="$(find ${BIN_PATH} -name '*.xctest')"
