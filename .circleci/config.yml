@@ -53,6 +53,7 @@ jobs:
 
     steps:
       - checkout
+      - run: whoami
       - run: ~/auto shipit -vvv --dry-run
 workflows:
   version: 2
