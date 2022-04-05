@@ -54,6 +54,8 @@ jobs:
     steps:
       - checkout
       - run: whoami
+      - run: echo $PATH
+      - run: which pod
       - run: ~/auto shipit -vvv --dry-run
 workflows:
   version: 2
