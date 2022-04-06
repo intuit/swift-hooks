@@ -1,3 +1,19 @@
+# 0.0.6 (Wed Apr 06 2022)
+
+#### 🐛 Bug Fix
+
+- Enable tvOS and watchOS support in Package [#6](https://github.com/intuit/swift-hooks/pull/6) ([@hborawski](https://github.com/hborawski))
+
+#### 📝 Documentation
+
+- add doc link to readme [#5](https://github.com/intuit/swift-hooks/pull/5) ([@hborawski](https://github.com/hborawski))
+
+#### Authors: 1
+
+- Harris Borawski ([@hborawski](https://github.com/hborawski))
+
+---
+
 # 0.0.5 (Tue Apr 05 2022)
 
 ### Release Notes
