@@ -15,6 +15,9 @@ asynchronous
   s.source           = { :git => 'https://github.com/intuit/swift-hooks.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '13.0'
+  s.macos.deployment_target = '10.15'
+  s.tvos.deployment_target = '13.0'
+  s.watchos.deployment_target = '6.0'
 
   s.source_files = ['Sources/SwiftHooks/**/*.swift']
   s.exclude_files = ['**/*.docc/**/*']
