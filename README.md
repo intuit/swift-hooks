@@ -16,7 +16,7 @@
 <a href="https://circleci.com/gh/intuit/swift-hooks"><img alt="CircleCI" src="https://img.shields.io/circleci/build/github/intuit/swift-hooks"></a>
 <img alt="Cocoapods" src="https://img.shields.io/cocoapods/v/SwiftHooks">
 <img alt="License" src="https://img.shields.io/cocoapods/l/SwiftHooks">
-<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/intuit/swift-hooks">
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/intuit/swift-hooks?logo=swift">
 <a href="https://intuit.github.io/swift-hooks/documentation/swifthooks/"><img alt="GitHub Pages" src="https://img.shields.io/badge/docs-pages-green"/></a>
 </div>
 
