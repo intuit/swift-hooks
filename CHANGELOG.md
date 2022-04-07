@@ -1,3 +1,31 @@
+# 0.1.0 (Thu Apr 07 2022)
+
+### Release Notes
+
+#### Add support for untapping hooks ([#10](https://github.com/intuit/swift-hooks/pull/10))
+
+Adds an `untap(_:)` method to hooks, and has all `tap` methods return an ID that can be used to untap.
+
+---
+
+#### 🚀 Enhancement
+
+- Add support for untapping hooks [#10](https://github.com/intuit/swift-hooks/pull/10) ([@hborawski](https://github.com/hborawski))
+
+#### 🐛 Bug Fix
+
+- publish report to codecov [#9](https://github.com/intuit/swift-hooks/pull/9) ([@hborawski](https://github.com/hborawski))
+
+#### 📝 Documentation
+
+- add badge to show platform support [#7](https://github.com/intuit/swift-hooks/pull/7) ([@hborawski](https://github.com/hborawski))
+
+#### Authors: 1
+
+- Harris Borawski ([@hborawski](https://github.com/hborawski))
+
+---
+
 # 0.0.6 (Wed Apr 06 2022)
 
 #### 🐛 Bug Fix
