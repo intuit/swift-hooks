@@ -41,9 +41,10 @@ jobs:
               --output-path SwiftHooks.doccarchive
 
             swift run docc process-archive transform-for-static-hosting --hosting-base-path swift-hooks SwiftHooks.doccarchive
+      - run:
+          name: Upload CodeCov Results
+          command: bash <(curl -s https://codecov.io/bash) -t $CODECOV_KEY
       - store_test_results:
-          path: .build/reports/
-      - store_artifacts:
           path: .build/reports/
       - persist_to_workspace:
           root: .
