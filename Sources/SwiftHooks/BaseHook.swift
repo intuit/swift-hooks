@@ -1,3 +1,5 @@
+import Foundation
+
 /// Context object populated by interceptors before
 /// being passed to taps
 public typealias HookContext = [String: Any]
@@ -25,6 +27,7 @@ public actor ConcurrentContext {
 /// A Tap object that contains a handler closure for when it is invoked
 public struct Tap<FunctionType> {
     public var name: String
+    public var id: String
     public var handler: FunctionType
 }
 
@@ -71,6 +74,10 @@ open class BaseHook<Parameters, TapType> {
         }
         return context
     }
+
+    /// Generates a random ID to use for tapping hooks
+    /// - Returns: A random ID String
+    open func generateRandomId() -> String { UUID().uuidString }
 }
 
 /// The TapInfo used for Sync hooks
@@ -82,8 +89,19 @@ open class BaseSyncHook<Parameters, ReturnType>: BaseHook<Parameters, SyncTapInf
     /// - Parameters:
     ///   - name: The name of the tapping object
     ///   - handler: The handler function to attach to this hook
-    public func tap(name: String, _ handler: @escaping (Parameters) -> ReturnType) {
+    /// - Returns: An ID to use for untapping, if tap was not rejected by interceptors
+    @discardableResult public func tap(name: String, _ handler: @escaping (Parameters) -> ReturnType) -> String? {
         tap(name: name) { handler($1) }
+    }
+
+    /// Add a handler to this hook
+    /// - Parameters:
+    ///   - name: The name of the tapping object
+    ///   - id: The ID to use for tapping
+    ///   - handler: The handler function to attach to this hook
+    /// - Returns: An ID to use for untapping, if tap was not rejected by interceptors
+    @discardableResult public func tap(name: String, id: String, _ handler: @escaping (Parameters) -> ReturnType) -> String? {
+        tap(name: name, id: id) { handler($1) }
     }
 
     /// Add a handler to this hook
@@ -92,10 +110,34 @@ open class BaseSyncHook<Parameters, ReturnType>: BaseHook<Parameters, SyncTapInf
     /// - Parameters:
     ///   - name: The name of the tapping object
     ///   - handler: The handler function to attach to this hook
-    public func tap(name: String, _ handler: @escaping (inout HookContext, Parameters) -> ReturnType) {
-        interceptors
-            .invokeRegisterInterceptors(Tap(name: name, handler: handler))
-            .map { taps.append($0) }
+    /// - Returns: An ID to use for untapping, if tap was not rejected by interceptors
+    @discardableResult public func tap(name: String, _ handler: @escaping (inout HookContext, Parameters) -> ReturnType) -> String? {
+        tap(name: name, id: generateRandomId(), handler)
+    }
+
+    /// Add a handler to this hook
+    ///
+    /// This variation receives ``HookContext`` when being called
+    /// - Parameters:
+    ///   - name: The name of the tapping object
+    ///   - id: The ID to use for tapping
+    ///   - handler: The handler function to attach to this hook
+    /// - Returns: An ID to use for untapping, if tap was not rejected by interceptors
+    @discardableResult public func tap(name: String, id: String, _ handler: @escaping (inout HookContext, Parameters) -> ReturnType) -> String? {
+        guard
+            let tap = interceptors.invokeRegisterInterceptors(Tap(name: name, id: id, handler: handler))
+        else {
+            return nil
+        }
+        untap(id)
+        taps.append(tap)
+        return id
+    }
+
+    /// Removes an tap from this hook
+    /// - Parameter id: The ID of the tap to remove
+    public func untap(_ id: String) {
+        taps = taps.filter { $0.id != id }
     }
 }
 
@@ -109,8 +151,20 @@ open class BaseAsyncHook<Parameters, ReturnType>: BaseHook<Parameters, AsyncTapI
     /// - Parameters:
     ///   - name: The name of the tapping object
     ///   - handler: The handler function to attach to this hook
-    public func tap(name: String, _ handler: @escaping (Parameters) -> ReturnType) {
+    /// - Returns: An ID to use for untapping, if tap was not rejected by interceptors
+    @discardableResult public func tap(name: String, _ handler: @escaping (Parameters) -> ReturnType) -> String? {
         tap(name: name) { handler($1) }
+    }
+
+    /// Add a synchronous handler to this hook
+    ///
+    /// - Parameters:
+    ///   - name: The name of the tapping object
+    ///   - id: The ID to use for tapping
+    ///   - handler: The handler function to attach to this hook
+    /// - Returns: An ID to use for untapping, if tap was not rejected by interceptors
+    @discardableResult public func tap(name: String, id: String, _ handler: @escaping (Parameters) -> ReturnType) -> String? {
+        tap(name: name, id: id) { handler($1) }
     }
 
     /// Add a synchronous handler to this hook
@@ -121,8 +175,23 @@ open class BaseAsyncHook<Parameters, ReturnType>: BaseHook<Parameters, AsyncTapI
     /// - Parameters:
     ///   - name: The name of the tapping object
     ///   - handler: The handler function to attach to this hook
-    public func tap(name: String, _ handler: @escaping (ConcurrentContext, Parameters) -> ReturnType) {
+    /// - Returns: An ID to use for untapping, if tap was not rejected by interceptors
+    @discardableResult public func tap(name: String, _ handler: @escaping (ConcurrentContext, Parameters) -> ReturnType) -> String? {
         tapAsync(name: name, handler)
+    }
+
+    /// Add a synchronous handler to this hook
+    ///
+    /// Although the handler is synchronous, the executing context is async, so this hook
+    /// receives ``ConcurrentContext`` instead of ``HookContext``
+    ///
+    /// - Parameters:
+    ///   - name: The name of the tapping object
+    ///   - id: The ID to use for tapping
+    ///   - handler: The handler function to attach to this hook
+    /// - Returns: An ID to use for untapping, if tap was not rejected by interceptors
+    @discardableResult public func tap(name: String, id: String, _ handler: @escaping (ConcurrentContext, Parameters) -> ReturnType) -> String? {
+        tapAsync(name: name, id: id, handler)
     }
 
     /// Add an asynchronous handler to this hook
@@ -130,8 +199,20 @@ open class BaseAsyncHook<Parameters, ReturnType>: BaseHook<Parameters, AsyncTapI
     /// - Parameters:
     ///   - name: The name of the tapping object
     ///   - handler: The handler function to attach to this hook
-    public func tapAsync(name: String, _ handler: @escaping (Parameters) async -> ReturnType) {
+    /// - Returns: An ID to use for untapping, if tap was not rejected by interceptors
+    @discardableResult public func tapAsync(name: String, _ handler: @escaping (Parameters) async -> ReturnType) -> String? {
         tapAsync(name: name) { await handler($1) }
+    }
+
+    /// Add an asynchronous handler to this hook
+    ///
+    /// - Parameters:
+    ///   - name: The name of the tapping object
+    ///   - handler: The handler function to attach to this hook
+    ///   - id: The ID to use for tapping
+    /// - Returns: An ID to use for untapping, if tap was not rejected by interceptors
+    @discardableResult public func tapAsync(name: String, id: String, _ handler: @escaping (Parameters) async -> ReturnType) -> String? {
+        tapAsync(name: name, id: id) { await handler($1) }
     }
 
     /// Add an asynchronous handler to this hook
@@ -141,10 +222,34 @@ open class BaseAsyncHook<Parameters, ReturnType>: BaseHook<Parameters, AsyncTapI
     /// - Parameters:
     ///   - name: The name of the tapping object
     ///   - handler: The handler function to attach to this hook
-    public func tapAsync(name: String, _ handler: @escaping (ConcurrentContext, Parameters) async -> ReturnType) {
-        interceptors
-            .invokeRegisterInterceptors(Tap(name: name, handler: handler))
-            .map { taps.append($0) }
+    /// - Returns: An ID to use for untapping, if tap was not rejected by interceptors
+    @discardableResult public func tapAsync(name: String, _ handler: @escaping (ConcurrentContext, Parameters) async -> ReturnType) -> String? {
+        tapAsync(name: name, id: generateRandomId(), handler)
+    }
+
+    /// Add an asynchronous handler to this hook
+    ///
+    /// This variation receives ``ConcurrentContext`` when being called
+    ///
+    /// - Parameters:
+    ///   - name: The name of the tapping object
+    ///   - id: The ID to use for tapping
+    ///   - handler: The handler function to attach to this hook
+    /// - Returns: An ID to use for untapping, if tap was not rejected by interceptors
+    @discardableResult public func tapAsync(name: String, id: String, _ handler: @escaping (ConcurrentContext, Parameters) async -> ReturnType) -> String? {
+        guard
+            let tap = interceptors.invokeRegisterInterceptors(Tap(name: name, id: id, handler: handler))
+        else {
+            return nil
+        }
+        taps.append(tap)
+        return id
+    }
+
+    /// Removes an tap from this hook
+    /// - Parameter id: The ID of the tap to remove
+    public func untap(_ id: String) {
+        taps = taps.filter { $0.id != id }
     }
 
     /// Sets up the ``ConcurrentContext`` for use in sending to tap handlers

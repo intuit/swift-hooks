@@ -1,0 +1,33 @@
+@Tutorial(time: 2) {
+    @Intro(title: "Untapping") {
+        All hooks have the ability to remove taps by calling `untap(_:)`.
+    }
+    
+    @Section(title: "Untapping Generated IDs") {
+        @ContentAndMedia {
+            IDs are generated automatically automatically if omitted.
+        }
+        
+        @Steps {            
+            @Step {
+                All `tap` calls will return an ID to untap with. The id can be `nil` if a register interceptor rejected the tap.
+                
+                @Code(name: "Untap.swift", file: UntapGeneratedId.swift)
+            }
+        }
+    }
+        
+    @Section(title: "Untapping Supplied IDs") {
+        @ContentAndMedia {
+            IDs can be supplied to any `tap` call to use a specific ID. Tapping a hook with the same ID more than once will only retain the most recent tap.
+        }
+        
+        @Steps {            
+            @Step {
+                All `tap` calls will return an ID to untap with. The id can be `nil` if a register interceptor rejected the tap.
+                
+                @Code(name: "Untap.swift", file: UntapSuppliedId.swift)
+            }
+        }
+    }
+}
