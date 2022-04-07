@@ -36,6 +36,12 @@
             
             @TutorialReference(tutorial: "doc:HookContextGuide")
         }
+        @Chapter(name: "Untapping") {
+            Advanced usage of SwiftHooks may see the need to remove taps under some circumstances.
+    <!--        @Image(source: <#file#>, alt: "<#accessible description#>")-->
+            
+            @TutorialReference(tutorial: "doc:Untapping")
+        }
     }
     
     @Resources {
