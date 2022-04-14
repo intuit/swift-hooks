@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    resource_class: small
     docker:
       - image: hborawski/swift-docc-docker:sha-fa2a2c1
 
