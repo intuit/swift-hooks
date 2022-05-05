@@ -20,5 +20,5 @@ asynchronous
   s.watchos.deployment_target = '6.0'
 
   s.source_files = ['Sources/SwiftHooks/**/*.swift']
-  s.exclude_files = ['**/*.docc/**/*']
+  s.exclude_files = ['**/*.docc/**/*', '**/*.swiftdoc']
 end
