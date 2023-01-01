@@ -95,3 +95,4 @@ This project is also set up for [SwiftFormat](https://github.com/nicklockwood/Sw
 ```bash
 swift run swiftformat Sources
 ```
+test
